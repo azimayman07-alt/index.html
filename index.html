@@ -1,1 +1,590 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Ana ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+    radial-gradient(ellipse at 50% 100%, #40305f 0%, #19132f 45%, #080817 100%);
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+}
+
+/* STARRY SKY */
+
+#stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 7px #fff;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%,100% {
+        opacity: .2;
+        transform: scale(.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.6);
+    }
+}
+
+/* SHOOTING STARS */
+
+.shooting-star {
+    position: fixed;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, white, transparent);
+    transform: rotate(-35deg);
+    animation: shoot 4s linear infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translate(0,0) rotate(-35deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    35% { opacity: 0; }
+    100% {
+        transform: translate(-400px,300px) rotate(-35deg);
+        opacity: 0;
+    }
+}
+
+/* MOON */
+
+.moon {
+    position: absolute;
+    top: 40px;
+    right: 10%;
+    font-size: 55px;
+    filter: drop-shadow(0 0 22px #ffe6bd);
+    animation: moonFloat 5s ease-in-out infinite;
+}
+
+@keyframes moonFloat {
+    50% { transform: translateY(-12px); }
+}
+
+/* MAIN CONTENT */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    padding: 55px 18px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #d9b9ed;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(39px, 8vw, 65px);
+    font-weight: 500;
+    margin-bottom: 14px;
+    background: linear-gradient(90deg, #ffe5f4, #d7b5ff, #fff1dc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glow 4s ease-in-out infinite;
+}
+
+@keyframes glow {
+    50% { filter: drop-shadow(0 0 15px #e6b8ff88); }
+}
+
+.intro {
+    color: #d7c8e8;
+    font-size: 14px;
+    line-height: 2;
+    margin-bottom: 35px;
+}
+
+/* ENVELOPE */
+
+.envelope-wrapper {
+    position: relative;
+    width: min(280px, 80vw);
+    height: 190px;
+    margin: 35px auto 15px;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: transform .4s;
+    filter: drop-shadow(0 15px 30px #0008);
+}
+
+.envelope-wrapper:hover {
+    transform: translateY(-8px);
+}
+
+.envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #e8b9d2;
+    border-radius: 5px;
+    bottom: 0;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 105px solid #d99aba;
+    z-index: 3;
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 105px solid #f5cde0;
+    transform-origin: top;
+    transition: transform .9s ease;
+    z-index: 5;
+}
+
+.letter-preview {
+    position: absolute;
+    width: 88%;
+    height: 165px;
+    left: 6%;
+    top: 12px;
+    background: #fff9f5;
+    border-radius: 5px;
+    transition: transform 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #a46d8b;
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    z-index: 2;
+}
+
+.letter-preview span {
+    font-size: 12px;
+    font-family: 'Quicksand';
+    margin-top: 8px;
+}
+
+.seal {
+    position: absolute;
+    background: #ad618b;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    left: 50%;
+    top: 95px;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    box-shadow: 0 2px 10px #9b507c88;
+    transition: opacity .3s;
+}
+
+.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.open .letter-preview {
+    transform: translateY(-115px);
+}
+
+.open .seal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.click-hint {
+    color: #e6cce9;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 18px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .4; }
+}
+
+/* BIRTHDAY LETTER */
+
+.letter {
+    display: none;
+    width: min(92vw, 530px);
+    background: linear-gradient(145deg, #fffaf7, #f9e9f2);
+    color: #59445a;
+    border-radius: 14px;
+    padding: 38px 30px;
+    margin-top: 45px;
+    box-shadow: 0 0 50px #dca6ff35;
+    text-align: left;
+    position: relative;
+    border: 1px solid #f4d4e8;
+}
+
+.letter::before {
+    content: "✿";
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    color: #d99aba;
+    font-size: 25px;
+}
+
+.letter.show {
+    display: block;
+    animation: appear 1.2s ease forwards;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.letter h2 {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 39px;
+    color: #b46c99;
+    margin-bottom: 25px;
+}
+
+.letter p {
+    font-size: 13px;
+    line-height: 2;
+    margin-bottom: 17px;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 27px;
+    color: #b46c99;
+    text-align: right;
+    margin-top: 30px;
+}
+
+.letter-footer {
+    text-align: center;
+    font-size: 21px;
+    margin-top: 25px;
+}
+
+/* FLOATING FLOWERS */
+
+.floating {
+    position: fixed;
+    pointer-events: none;
+    z-index: 4;
+    bottom: -40px;
+    animation: floatUp linear forwards;
+    opacity: .8;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* FOOTER */
+
+.footer {
+    color: #bba5d4;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-top: 55px;
+}
+
+/* MOBILE */
+
+@media(max-width: 400px) {
+    .letter {
+        padding: 32px 23px;
+    }
+
+    .letter p {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<div class="moon">☾</div>
+
+<main class="container">
+
+    <div class="subtitle">
+        ✧ a little something for you ✧
+    </div>
+
+    <h1>Happy Birthday ♡</h1>
+
+    <p class="intro">
+        Somewhere in this little universe,<br>
+        there's a surprise waiting just for you.
+    </p>
+
+    <!-- ENVELOPE -->
+
+    <div class="envelope-wrapper" id="envelope"
+         onclick="openLetter()">
+
+        <div class="letter-preview">
+            To Ana, ♡
+            <span>A little birthday letter</span>
+        </div>
+
+        <div class="envelope"></div>
+
+        <div class="flap"></div>
+
+        <div class="seal">♡</div>
+
+    </div>
+
+    <div class="click-hint" id="hint">
+        ✧ TAP THE ENVELOPE TO OPEN ✧
+    </div>
+
+    <!-- ANA'S LETTER -->
+
+    <article class="letter" id="letter">
+
+        <h2>Dear Ana ♡</h2>
+
+        <p>
+            First of all, HAPPY BIRTHDAY, ANA!! 🌷
+        </p>
+
+        <p>
+            I hope you know how much you deserve all the
+            happiness in the world. Today is your day, so
+            I hope you get to smile a little extra, laugh
+            a little louder, and make memories that you'll
+            look back on with the biggest smile.
+        </p>
+
+        <p>
+            Honestly, I'm really glad I got to know you.
+            Having you as a friend is something I genuinely
+            appreciate, and I hope you never lose that
+            wonderful little spark that makes you, well,
+            YOU.
+        </p>
+
+        <p>
+            As you step into another year, I hope life
+            surprises you in the best ways possible.
+            May you achieve everything you've been working
+            towards, meet amazing people, experience
+            beautiful things, and find reasons to be happy
+            even on the most ordinary days.
+        </p>
+
+        <p>
+            And please, never forget to take care of
+            yourself, enjoy the little things, and keep
+            being your lovely self. You deserve friendships
+            that feel genuine, opportunities that excite
+            you, and a future that makes you proud.
+        </p>
+
+        <p>
+            Here's to another year of memories, laughter,
+            random conversations, and countless beautiful
+            moments.
+        </p>
+
+        <p>
+            Have the most wonderful birthday, Ana.
+            I hope this little surprise makes you smile. ♡
+        </p>
+
+        <div class="signature">
+            With lots of wishes,<br>
+            Ayman ♡
+        </div>
+
+        <div class="letter-footer">
+            🌷 ✨ 🌙 💗
+        </div>
+
+    </article>
+
+    <div class="footer">
+        MADE WITH A LITTLE LOVE & STARDUST ✧
+    </div>
+
+</main>
+
+<script>
+
+// CREATE STARS
+
+const stars = document.getElementById("stars");
+
+for(let i = 0; i < 160; i++) {
+
+    const star = document.createElement("div");
+    star.className = "star";
+
+    const size = Math.random() * 3 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 4 + "s";
+    star.style.animationDuration =
+        (2 + Math.random() * 4) + "s";
+
+    stars.appendChild(star);
+}
+
+// SHOOTING STARS
+
+function createShootingStar() {
+
+    const shooting = document.createElement("div");
+    shooting.className = "shooting-star";
+
+    shooting.style.top = Math.random() * 65 + "%";
+    shooting.style.left = (30 + Math.random() * 70) + "%";
+
+    document.body.appendChild(shooting);
+
+    setTimeout(() => shooting.remove(), 4000);
+}
+
+setInterval(createShootingStar, 3500);
+
+// OPEN ENVELOPE
+
+let opened = false;
+
+function openLetter() {
+
+    if(opened) return;
+
+    opened = true;
+
+    const envelope = document.getElementById("envelope");
+    const letter = document.getElementById("letter");
+    const hint = document.getElementById("hint");
+
+    envelope.classList.add("open");
+
+    hint.innerHTML = "♡ A LITTLE SURPRISE FOR YOU ♡";
+
+    setTimeout(() => {
+
+        letter.classList.add("show");
+
+        letter.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        hint.style.display = "none";
+
+    }, 1100);
+}
+
+// FLOATING FLOWERS AND SPARKLES
+
+const decorations = [
+    "🌸", "✿", "✨", "🌷",
+    "♡", "✧", "🌼", "💗"
+];
+
+function createDecoration() {
+
+    const item = document.createElement("div");
+
+    item.className = "floating";
+
+    item.innerHTML =
+        decorations[Math.floor(Math.random() *
+        decorations.length)];
+
+    item.style.left = Math.random() * 100 + "vw";
+
+    item.style.fontSize =
+        (14 + Math.random() * 18) + "px";
+
+    item.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(() => item.remove(), 15000);
+}
+
+setInterval(createDecoration, 700);
+
+</script>
+
+</body>
+</html>
